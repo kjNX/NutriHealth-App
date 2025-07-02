@@ -29,7 +29,7 @@ fun SetupScreen(
 
     Column(modifier = modifier.padding(8.dp)) {
         ScreenTracker(pagerState.currentPage, 3)
-        HorizontalPager(state = pagerState) { i ->
+        HorizontalPager(state = pagerState, userScrollEnabled = false) { i ->
             when(i) {
                 0 -> {
                     EssentialData(

@@ -8,6 +8,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SegmentedButton
@@ -23,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -88,6 +88,32 @@ fun LabeledButton(
     }
 }
 
+/*@Composable
+fun LabeledButton(
+    title: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    @DrawableRes icon: Int
+) {
+    Button(onClick = onClick, modifier = modifier) {
+        Icon(painter = painterResource(icon), contentDescription = null)
+        Text(text = title)
+    }
+}*/
+
+@Composable
+fun IconButton(
+    icon: ImageVector,
+    contentDescription: String?,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+//    bgColor: Color
+) {
+    IconButton(onClick = onClick, modifier = modifier) {
+        Icon(imageVector = icon, contentDescription = contentDescription)
+    }
+}
+
 @Composable
 fun WideButtonGroup(
     selectedIndex: Int,
@@ -142,10 +168,4 @@ fun RadioGroup(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    RadioGroup(0, options = listOf("A", "B"), {})
 }
