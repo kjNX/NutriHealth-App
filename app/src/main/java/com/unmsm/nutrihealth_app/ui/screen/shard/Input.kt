@@ -1,5 +1,6 @@
 package com.unmsm.nutrihealth_app.ui.screen.shard
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -60,14 +61,15 @@ fun LabeledSwitch(
     onCheckedChange: (Boolean) -> Unit,
     title: String,
     modifier: Modifier = Modifier,
+    subtitle: String = "",
     icon: ImageVector? = null
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        if(icon != null) Icon(imageVector = icon, contentDescription = null)
-        Text(text = title, modifier = Modifier.weight(10f))
+        IconLabel(title = title, subtitle = subtitle, icon = icon)
         Switch(
             checked = checked,
             onCheckedChange = onCheckedChange

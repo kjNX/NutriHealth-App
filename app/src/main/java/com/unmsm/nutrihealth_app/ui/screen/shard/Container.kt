@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -63,9 +66,9 @@ fun ValueCard(
 @Composable
 fun TitledCard(
     title: String,
-    content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    icon: ImageVector? = null
+    icon: ImageVector? = null,
+    content: @Composable () -> Unit
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -73,34 +76,14 @@ fun TitledCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             if(icon == null) Text(text = title, style = MaterialTheme.typography.titleMedium)
             else Row {
-                Icon(imageVector = icon, contentDescription = null)
+                Icon(imageVector = icon, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
                 Text(text = title, style = MaterialTheme.typography.titleMedium)
             }
             content()
         }
-    }
-}
-
-@Composable
-fun KeyDefinitions(
-    title: String,
-    subtitle: String,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null
-) {
-    val col = @Composable { modifier: Modifier ->
-        Column(modifier = modifier) {
-            Text(text = title, style = MaterialTheme.typography.titleMedium)
-            Text(text = subtitle, style = MaterialTheme.typography.labelMedium)
-        }
-    }
-
-    if(icon == null) col(modifier) else Row(modifier = modifier) {
-        Icon(imageVector = icon, contentDescription = null)
-        col(Modifier)
     }
 }
 
