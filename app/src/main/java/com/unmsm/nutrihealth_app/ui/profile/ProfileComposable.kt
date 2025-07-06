@@ -1,16 +1,13 @@
-package com.unmsm.nutrihealth_app.ui.screen
+package com.unmsm.nutrihealth_app.ui.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Check
@@ -24,13 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.unmsm.nutrihealth_app.ui.screen.shard.IndexLabel
-import com.unmsm.nutrihealth_app.ui.screen.shard.KeyIndicator
-import com.unmsm.nutrihealth_app.ui.screen.shard.LabeledProgressBar
-import com.unmsm.nutrihealth_app.ui.screen.shard.TitledCard
-import com.unmsm.nutrihealth_app.ui.screen.shard.ValueCard
+import com.unmsm.nutrihealth_app.ui.shard.IndexLabel
+import com.unmsm.nutrihealth_app.ui.shard.KeyIndicator
+import com.unmsm.nutrihealth_app.ui.shard.LabeledProgressBar
+import com.unmsm.nutrihealth_app.ui.shard.TitledCard
+import com.unmsm.nutrihealth_app.ui.shard.ValueCard
 import com.unmsm.nutrihealth_app.util.icon.FoodBank
 import com.unmsm.nutrihealth_app.util.icon.Target
 
@@ -152,20 +148,3 @@ fun Recommendations(
         )
     }
 }
-
-@Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        ProfileTag()
-        TargetWeight()
-        NutritionalPlan()
-        Recommendations({}, {}, {})
-    }
-}
-

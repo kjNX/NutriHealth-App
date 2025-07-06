@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen.page
+package com.unmsm.nutrihealth_app.ui.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,9 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.unmsm.nutrihealth_app.ui.screen.shard.EnhancedTextField
-import com.unmsm.nutrihealth_app.ui.screen.shard.LabeledButton
-import com.unmsm.nutrihealth_app.ui.screen.shard.WideButtonGroup
+import com.unmsm.nutrihealth_app.ui.shard.EnhancedTextField
+import com.unmsm.nutrihealth_app.ui.shard.LabeledButton
+import com.unmsm.nutrihealth_app.ui.shard.WideButtonGroup
 
 val genderList = listOf("Hombre", "Mujer") // Solo hay 2 (^_^)
 

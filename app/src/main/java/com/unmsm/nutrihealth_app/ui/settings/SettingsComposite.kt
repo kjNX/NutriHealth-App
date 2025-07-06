@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen
+package com.unmsm.nutrihealth_app.ui.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -17,10 +17,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.unmsm.nutrihealth_app.ui.screen.page.AccountSettings
-import com.unmsm.nutrihealth_app.ui.screen.page.AppliSettings
 import kotlinx.coroutines.launch
-import kotlinx.serialization.internal.throwMissingFieldException
 
 val tabList = listOf(@Composable { -> AccountSettings() }, @Composable { -> AppliSettings() })
 val nameList = listOf("Cuenta", "Aplicación")

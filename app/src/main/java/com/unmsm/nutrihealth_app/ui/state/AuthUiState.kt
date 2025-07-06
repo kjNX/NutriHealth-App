@@ -1,8 +1,0 @@
-package com.unmsm.nutrihealth_app.ui.state
-
-data class AuthUiState(
-    var login: Boolean = true,
-    var name: String = "",
-    var email: String = "",
-    var password: String = ""
-)

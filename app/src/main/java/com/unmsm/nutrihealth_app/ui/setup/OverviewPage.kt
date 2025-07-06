@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen.page
+package com.unmsm.nutrihealth_app.ui.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.unmsm.nutrihealth_app.ui.screen.shard.LabeledButton
-import com.unmsm.nutrihealth_app.ui.screen.shard.ValueCard
+import com.unmsm.nutrihealth_app.ui.shard.LabeledButton
+import com.unmsm.nutrihealth_app.ui.shard.ValueCard
 
 @Composable
 fun NutrientDistribution(

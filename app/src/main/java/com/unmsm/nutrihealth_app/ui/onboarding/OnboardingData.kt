@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen
+package com.unmsm.nutrihealth_app.ui.onboarding
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import com.unmsm.nutrihealth_app.R
-import com.unmsm.nutrihealth_app.ui.screen.shard.LabeledButton
+import com.unmsm.nutrihealth_app.ui.shard.LabeledButton
 
 data class OnboardingData(
     @DrawableRes val image: Int,

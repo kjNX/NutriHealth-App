@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen
+package com.unmsm.nutrihealth_app.ui.setup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,29 +10,45 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.unmsm.nutrihealth_app.ui.screen.page.EssentialData
-import com.unmsm.nutrihealth_app.ui.screen.page.OverviewData
-import com.unmsm.nutrihealth_app.ui.screen.page.TargetData
-import com.unmsm.nutrihealth_app.ui.screen.shard.ScreenTracker
-import com.unmsm.nutrihealth_app.ui.viewmodel.SetupViewModel
+import com.unmsm.nutrihealth_app.ui.shard.ScreenTracker
 import kotlinx.coroutines.launch
 
 @Composable
 fun SetupScreen(
+    genderIndex: Int,
+    intensity: Float,
+    age: String,
+    height: String,
+    weight: String,
+    onGenderChange: (Int) -> Unit,
+    onAgeChange: (String) -> Unit,
+    onHeightChange: (String) -> Unit,
+    onWeightChange: (String) -> Unit,
+    onIntensityChange: (Float) -> Unit,
+    onEssentialFinish: () -> Unit,
+    targetWeight: String,
+    mainGoal: Int,
+    onTargetWeightChange: (String) -> Unit,
+    onGoalChange: (Int) -> Unit,
+    onTargetFinish: () -> Unit,
+    tmb: Int,
+    recommendedKcal: Int,
+    protein: Int,
+    carbs: Int,
+    fats: Int,
+    timeToReach: Int,
     onSetupFinish: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: SetupViewModel = viewModel()
+    modifier: Modifier = Modifier
 ) {
     var pagerState = rememberPagerState(pageCount = { 3 })
     var coroutineScope = rememberCoroutineScope()
-    var uiState = viewModel.uiState
 
     Column(modifier = modifier.padding(8.dp)) {
         ScreenTracker(pagerState.currentPage, 3)
         HorizontalPager(state = pagerState, userScrollEnabled = false) { i ->
             when(i) {
                 0 -> {
-                    EssentialData(
+                    EssentialPage(
                         genderIndex = uiState.genderIndex,
                         intensity = uiState.intensity,
                         age = uiState.age,
@@ -51,30 +67,24 @@ fun SetupScreen(
                     )
                 }
                 1 -> {
-                    TargetData(
+                    TargetPage(
                         targetWeight = uiState.targetWeight,
                         mainGoal = uiState.mainGoal,
                         onWeightChange = viewModel::setTargetWeight,
                         onGoalChange = viewModel::setMainGoal,
-                        onNext = {
-//                            viewModel.submitTarget()
-                            coroutineScope.launch { pagerState.animateScrollToPage(2) }
-                        },
+                        onNext = onTargetFinish,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
                 2 -> {
-                    OverviewData(
+                    OverviewPage(
                         tmb = uiState.tmb,
                         recommendedKcal = uiState.recommendedKcal,
                         protein = uiState.protein,
                         carbs = uiState.carbs,
                         fats = uiState.fats,
                         timeToReach = uiState.timeToReach,
-                        onNext = {
-//                            viewModel.confirm()
-                            onSetupFinish()
-                        },
+                        onNext = onSetupFinish,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
