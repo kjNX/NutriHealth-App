@@ -4,7 +4,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.unmsm.nutrihealth_app.logic.model.ItemLog
+import com.unmsm.nutrihealth_app.model.ItemLog
 
 /*
 

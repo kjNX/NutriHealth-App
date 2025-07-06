@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.logic.model
+package com.unmsm.nutrihealth_app.model
 
 data class Contact(
     val name: String,
