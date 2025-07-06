@@ -1,8 +1,10 @@
-package com.unmsm.nutrihealth_app.logic.model
+package com.unmsm.nutrihealth_app.model
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+// ItemLog es la interfaz base para registros de eventos.
+// Debe ser implementado para generar historiales.
 interface ItemLog {
     @Composable
     fun GetItemRow(modifier: Modifier = Modifier)

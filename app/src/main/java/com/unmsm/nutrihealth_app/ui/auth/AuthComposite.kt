@@ -63,7 +63,7 @@ fun AuthComposite(
         )
         Spacer(Modifier.height(8.dp))
         LabeledButton(
-            title = "Iniciar sesión",
+            title = if(isLogin) "Iniciar sesión" else "Registrarse",
             onClick = onSuccessfulAuth
         )
         AnotherLoginRow(icons, loginName, onLoginSelect)

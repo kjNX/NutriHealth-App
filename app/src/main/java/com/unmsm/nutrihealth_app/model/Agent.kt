@@ -1,6 +1,9 @@
 package com.unmsm.nutrihealth_app.model
 
-data class Contact(
+
+// Un Agent define un bot de mensajería.
+data class Agent(
     val name: String,
-    val description: String
+    val description: String,
+    val promptBase: String
 )

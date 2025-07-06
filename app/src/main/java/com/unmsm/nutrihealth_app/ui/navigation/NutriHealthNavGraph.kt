@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.unmsm.nutrihealth_app.ui.auth.AuthExport
+import com.unmsm.nutrihealth_app.ui.main.MainExport
 import com.unmsm.nutrihealth_app.ui.onboarding.OnboardingComposite
 import com.unmsm.nutrihealth_app.ui.profile.ProfileExport
 import com.unmsm.nutrihealth_app.ui.settings.SettingsExport
@@ -21,6 +22,7 @@ enum class NutriHealthNavGraph {
     FoodHistory,
     ActivityHistory,
     Messaging,
+    Scan,
     Settings
 }
 
@@ -45,7 +47,7 @@ fun NutriHealthNavGraph(modifier: Modifier = Modifier) {
             SetupComposite(onSetupFinish = { goto(NutriHealthNavGraph.Main.name) })
         }
         composable(NutriHealthNavGraph.Main.name) {
-            TODO()
+            MainExport()
         }
         composable(NutriHealthNavGraph.Dashboard.name) {
             TODO()

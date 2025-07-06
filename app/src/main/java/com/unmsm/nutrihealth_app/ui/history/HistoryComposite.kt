@@ -18,7 +18,7 @@ SE DEBE IMPLEMENTAR LA INTERFAZ ITEMLOG PARA PODER UTILIZAR ESTE HISTORIAL
  */
 
 @Composable
-fun<T: ItemLog> HistoryScreen(itemLogs: List<T>, modifier: Modifier = Modifier) {
+fun<T: ItemLog> HistoryComposite(itemLogs: List<T>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         items(itemLogs) { it.GetItemRow() }
     }
