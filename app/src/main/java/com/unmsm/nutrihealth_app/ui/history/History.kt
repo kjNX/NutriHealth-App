@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen
+package com.unmsm.nutrihealth_app.ui.history
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items

@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.settings
+package com.unmsm.nutrihealth_app.ui.setup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +17,7 @@ import com.unmsm.nutrihealth_app.ui.shard.RadioGroup
 val goalOptions = listOf("Mejorar salud", "Bajar de peso", "Ganar músculo")
 
 @Composable
-fun TargetData(
+fun TargetPage(
     targetWeight: String,
     mainGoal: Int,
     onWeightChange: (String) -> Unit,

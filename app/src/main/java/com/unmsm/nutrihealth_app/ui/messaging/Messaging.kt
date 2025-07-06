@@ -1,2 +1,2 @@
-package com.unmsm.nutrihealth_app.ui.screen
+package com.unmsm.nutrihealth_app.ui.messaging
 

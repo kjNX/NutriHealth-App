@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.settings
+package com.unmsm.nutrihealth_app.ui.setup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,7 +18,7 @@ import com.unmsm.nutrihealth_app.ui.shard.WideButtonGroup
 val genderList = listOf("Hombre", "Mujer") // Solo hay 2 (^_^)
 
 @Composable
-fun EssentialData(
+fun EssentialPage(
     genderIndex: Int,
     intensity: Float,
     age: String,

@@ -8,13 +8,14 @@ import androidx.navigation.compose.rememberNavController
 
 enum class NutriHealth {
     Onboarding,
-    Login,
+    Auth,
     Setup,
     Main,
     Dashboard,
     Profile,
     FoodHistory,
     ActivityHistory,
+    Messaging,
     Settings
 }
 
@@ -23,8 +24,8 @@ fun NutriHealthNav(modifier: Modifier = Modifier) {
     var navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = NutriHealth.Onboarding.name) {
-        composable() {
-
+        composable(NutriHealth.Onboarding.name) {
+            
         }
     }
 }

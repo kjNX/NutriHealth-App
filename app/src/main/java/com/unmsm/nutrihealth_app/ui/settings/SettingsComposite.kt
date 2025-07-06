@@ -15,19 +15,55 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
-val tabList = listOf(@Composable { -> AccountSettings() }, @Composable { -> AppliSettings() })
 val nameList = listOf("Cuenta", "Aplicación")
 val iconList = listOf(Icons.Default.Person, Icons.Default.Info)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier) {
-    var pagerState = rememberPagerState { tabList.size }
+fun SettingsComposite(
+    name: String,
+    onNameChange: (String) -> Unit,
+    email: String,
+    onEmailChange: (String) -> Unit,
+    phoneNumber: String,
+    onPhoneNumberChange: (String) -> Unit,
+    onCommit: () -> Unit,
+    onPasswordChangeRequest: () -> Unit,
+    measureType: Boolean,
+    onMeasureTypeToggle: (Boolean) -> Unit,
+    notifications: Boolean,
+    onNotificationsToggle: (Boolean) -> Unit,
+    onExportRequest: () -> Unit,
+    onDeleteRequest: () -> Unit,
+    onLogout: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var pagerState = rememberPagerState { nameList.size }
     var coroutineScope = rememberCoroutineScope()
+    val tabList = listOf(
+        @Composable { -> AccountPage(
+            name = name,
+            onNameChange = onNameChange,
+            email = email,
+            onEmailChange = onEmailChange,
+            phoneNumber = phoneNumber,
+            onPhoneNumberChange = onPhoneNumberChange,
+            onCommit = onCommit,
+            onPasswordChangeRequest = onPasswordChangeRequest
+        ) },
+        @Composable { -> AppliPage(
+            measureType = measureType,
+            onMeasureTypeToggle = onMeasureTypeToggle,
+            notifications = notifications,
+            onNotificationsToggle = onNotificationsToggle,
+            onExportRequest = onExportRequest,
+            onDeleteRequest = onDeleteRequest,
+            onLogout = onLogout
+        ) }
+    )
 
     Column(modifier = modifier) {
         PrimaryTabRow(pagerState.currentPage) {
@@ -50,10 +86,4 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(vertical = 16.dp, horizontal = 8.dp)
         ) { tabList[it]() }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    SettingsScreen()
 }

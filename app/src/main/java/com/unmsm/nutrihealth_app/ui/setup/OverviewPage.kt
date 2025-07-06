@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.settings
+package com.unmsm.nutrihealth_app.ui.setup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -52,7 +52,7 @@ fun NutrientDistribution(
 }
 
 @Composable
-fun OverviewData(
+fun OverviewPage(
     tmb: Int,
     recommendedKcal: Int,
     protein: Int,
@@ -89,7 +89,7 @@ fun OverviewData(
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    OverviewData(
+    OverviewPage(
         tmb = 0,
         recommendedKcal = 0,
         protein = 0,

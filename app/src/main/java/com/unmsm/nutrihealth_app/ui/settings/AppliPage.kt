@@ -64,7 +64,7 @@ fun DataChoices(
 }
 
 @Composable
-fun AppliSettings(
+fun AppliPage(
     measureType: Boolean,
     onMeasureTypeToggle: (Boolean) -> Unit,
     notifications: Boolean,

@@ -14,37 +14,21 @@ import com.unmsm.nutrihealth_app.ui.shard.ScreenTracker
 import kotlinx.coroutines.launch
 
 @Composable
-fun SetupScreen(
-    genderIndex: Int,
-    intensity: Float,
-    age: String,
-    height: String,
-    weight: String,
-    onGenderChange: (Int) -> Unit,
-    onAgeChange: (String) -> Unit,
-    onHeightChange: (String) -> Unit,
-    onWeightChange: (String) -> Unit,
-    onIntensityChange: (Float) -> Unit,
-    onEssentialFinish: () -> Unit,
-    targetWeight: String,
-    mainGoal: Int,
-    onTargetWeightChange: (String) -> Unit,
-    onGoalChange: (Int) -> Unit,
-    onTargetFinish: () -> Unit,
-    tmb: Int,
-    recommendedKcal: Int,
-    protein: Int,
-    carbs: Int,
-    fats: Int,
-    timeToReach: Int,
+fun SetupComposite(
     onSetupFinish: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: SetupViewModel = viewModel()
 ) {
+    var uiState = viewModel.uiState
     var pagerState = rememberPagerState(pageCount = { 3 })
     var coroutineScope = rememberCoroutineScope()
 
+    val goNext = {
+        coroutineScope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+    }
+
     Column(modifier = modifier.padding(8.dp)) {
-        ScreenTracker(pagerState.currentPage, 3)
+        ScreenTracker(pagerState.currentPage, pagerState.pageCount)
         HorizontalPager(state = pagerState, userScrollEnabled = false) { i ->
             when(i) {
                 0 -> {
@@ -60,8 +44,7 @@ fun SetupScreen(
                         onWeightChange = viewModel::setWeight,
                         onIntensityChange = viewModel::setIntensity,
                         onNext = {
-//                            viewModel.submitData()
-                            coroutineScope.launch { pagerState.animateScrollToPage(1) }
+                            goNext()
                         },
                         modifier = Modifier.fillMaxSize()
                     )
@@ -72,7 +55,9 @@ fun SetupScreen(
                         mainGoal = uiState.mainGoal,
                         onWeightChange = viewModel::setTargetWeight,
                         onGoalChange = viewModel::setMainGoal,
-                        onNext = onTargetFinish,
+                        onNext = {
+                            goNext()
+                        },
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -84,7 +69,9 @@ fun SetupScreen(
                         carbs = uiState.carbs,
                         fats = uiState.fats,
                         timeToReach = uiState.timeToReach,
-                        onNext = onSetupFinish,
+                        onNext = {
+                            onSetupFinish()
+                        },
                         modifier = Modifier.fillMaxSize()
                     )
                 }

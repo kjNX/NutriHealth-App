@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen.dialog
+package com.unmsm.nutrihealth_app.ui.main
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog

@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.ui.screen.shard
+package com.unmsm.nutrihealth_app.ui.shard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

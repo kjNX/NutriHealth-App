@@ -64,7 +64,7 @@ fun SecuritySettings(
 }
 
 @Composable
-fun AccountSettings(
+fun AccountPage(
     name: String,
     onNameChange: (String) -> Unit,
     email: String,
