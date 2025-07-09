@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.model
+package com.unmsm.nutrihealth_app.model.live
 
 // User define al usuario y sus datos base
 data class User(

@@ -1,4 +1,4 @@
-package com.unmsm.nutrihealth_app.model.live
+package com.unmsm.nutrihealth_app.model.live.history
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

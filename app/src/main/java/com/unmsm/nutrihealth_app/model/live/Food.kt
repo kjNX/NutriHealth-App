@@ -1,8 +1,7 @@
-package com.unmsm.nutrihealth_app.model
+package com.unmsm.nutrihealth_app.model.live
 
 // Food define un tipo de comido, importado de /food/ en Firestore
 data class Food(
-    val id: Int,
     val name: String = "",
     val type: String = "",
     val category: String = "",

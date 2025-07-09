@@ -4,11 +4,12 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthRepository : AuthRepository {
-    private val instance = Firebase.auth
+    private val instance = FirebaseAuth.getInstance()
 
     override val currentSession
         get() = instance.currentUser?.uid ?: ""
@@ -23,9 +24,7 @@ class FirebaseAuthRepository : AuthRepository {
             .addOnCompleteListener { onReturn(it.isSuccessful) }
     }
 
-    override fun logout() {
-        instance.signOut()
-    }
+    override fun logout() { instance.signOut() }
 
     override suspend fun delete(onReturn: (Boolean) -> Unit) {
         instance.currentUser?.delete()?.addOnCompleteListener { onReturn(it.isSuccessful) }

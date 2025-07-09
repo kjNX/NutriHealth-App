@@ -1,7 +1,7 @@
 package com.unmsm.nutrihealth_app.data.messaging
 
-import com.unmsm.nutrihealth_app.model.Agent
+import com.unmsm.nutrihealth_app.model.live.Actor
 
 interface MessagingRepository {
-    suspend fun getResponse(agent: Agent)
+    suspend fun getResponse(actor: Actor)
 }
