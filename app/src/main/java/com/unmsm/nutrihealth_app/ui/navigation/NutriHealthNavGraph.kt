@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.unmsm.nutrihealth_app.ui.auth.AuthExport
 import com.unmsm.nutrihealth_app.ui.main.MainExport
 import com.unmsm.nutrihealth_app.ui.onboarding.OnboardingComposite
@@ -32,9 +34,13 @@ fun NutriHealthNavGraph(modifier: Modifier = Modifier) {
 
     val goto = { route: String -> navController.navigate(route) }
 
+    val starting =
+        if(Firebase.auth.currentUser == null) NutriHealthNavGraph.Onboarding.name
+        else NutriHealthNavGraph.Main.name
+
     NavHost(
         navController = navController,
-        startDestination = NutriHealthNavGraph.Onboarding.name,
+        startDestination = starting,
         modifier = modifier
     ) {
         composable(NutriHealthNavGraph.Onboarding.name) {

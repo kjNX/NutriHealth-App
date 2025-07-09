@@ -10,13 +10,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun AuthExport(
     onSuccessfulAuth: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: AuthViewModel = viewModel()
+    viewModel: AuthViewModel = viewModel(factory = AuthViewModel.Factory)
 ) {
     var uiState = viewModel.uiState
 
     Scaffold { innerPadding ->
         AuthComposite(
             modifier = modifier.padding(innerPadding),
+            status = uiState.status,
             isLogin = uiState.login,
             name = uiState.name,
             email = uiState.email,
@@ -25,6 +26,8 @@ fun AuthExport(
             onEmailChange = viewModel::updateEmail,
             onPasswordChange = viewModel::updatePassword,
             onSwitch = viewModel::toggleLogin,
+            onLogin = viewModel::login,
+            onRegister = viewModel::register,
             onSuccessfulAuth = onSuccessfulAuth
         )
     }

@@ -1,5 +1,6 @@
 package com.unmsm.nutrihealth_app.ui.auth
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,17 +12,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.unmsm.nutrihealth_app.R
 import com.unmsm.nutrihealth_app.ui.shard.LabeledButton
-import com.unmsm.nutrihealth_app.ui.auth.AuthViewModel
 
 @Composable
 fun AuthComposite(
+    status: AuthUiState.Status,
     isLogin: Boolean,
     name: String,
     email: String,
@@ -30,9 +32,27 @@ fun AuthComposite(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSwitch: () -> Unit,
+    onLogin: (String, String) -> Unit,
+    onRegister: (String, String) -> Unit,
     onSuccessfulAuth: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(status) {
+        when(status) {
+            AuthUiState.Status.NONE -> {}
+            AuthUiState.Status.LOADING -> Toast.makeText(context, "Cargando...", Toast.LENGTH_SHORT)
+                .show()
+            AuthUiState.Status.FAILED -> Toast.makeText(
+                context,
+                "Error. Vuelva a intentar",
+                Toast.LENGTH_SHORT
+            ).show()
+            AuthUiState.Status.SUCCESS -> onSuccessfulAuth()
+        }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -64,7 +84,7 @@ fun AuthComposite(
         Spacer(Modifier.height(8.dp))
         LabeledButton(
             title = if(isLogin) "Iniciar sesión" else "Registrarse",
-            onClick = onSuccessfulAuth
+            onClick = { if(isLogin) onLogin(email, password) else onRegister(email, password) }
         )
         AnotherLoginRow(icons, loginName, onLoginSelect)
         LoginSelect(isLogin, onSwitch)
