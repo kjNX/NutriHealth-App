@@ -33,7 +33,7 @@ fun AuthComposite(
     onPasswordChange: (String) -> Unit,
     onSwitch: () -> Unit,
     onLogin: (String, String) -> Unit,
-    onRegister: (String, String) -> Unit,
+    onRegister: (String, String, String) -> Unit,
     onSuccessfulAuth: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -84,7 +84,7 @@ fun AuthComposite(
         Spacer(Modifier.height(8.dp))
         LabeledButton(
             title = if(isLogin) "Iniciar sesión" else "Registrarse",
-            onClick = { if(isLogin) onLogin(email, password) else onRegister(email, password) }
+            onClick = { if(isLogin) onLogin(email, password) else onRegister(name, email, password) }
         )
         AnotherLoginRow(icons, loginName, onLoginSelect)
         LoginSelect(isLogin, onSwitch)

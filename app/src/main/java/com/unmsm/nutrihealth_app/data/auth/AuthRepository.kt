@@ -5,9 +5,10 @@ import com.google.firebase.auth.AuthResult
 
 interface AuthRepository {
     val currentSession : String // returns the uid of the current session or an empty string
+    val email: String
 
-    suspend fun login(email: String, password: String, onReturn: (Boolean) -> Unit)
-    suspend fun register(email: String, password: String, onReturn: (Boolean) -> Unit)
+    suspend fun login(email: String, password: String) : Boolean
+    suspend fun register(email: String, password: String) : Boolean
     fun logout()
-    suspend fun delete(onReturn: (Boolean) -> Unit)
+    suspend fun delete() : Boolean
 }

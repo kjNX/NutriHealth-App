@@ -12,10 +12,12 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.unmsm.nutrihealth_app.NutriHealthApp
 import com.unmsm.nutrihealth_app.data.auth.AuthRepository
 import com.unmsm.nutrihealth_app.data.database.DatabaseRepository
+import com.unmsm.nutrihealth_app.model.live.User
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val databaseRepository: DatabaseRepository
 ) : ViewModel() {
     var uiState by mutableStateOf(AuthUiState())
 
@@ -35,12 +37,19 @@ class AuthViewModel(
         }
     }
 
-    fun register(email: String, password: String) {
+    fun register(name: String, email: String, password: String) {
         uiState = uiState.copy(status = AuthUiState.Status.LOADING)
         viewModelScope.launch {
-            authRepository.register(email, password) {
+            authRepository.register(email, password)
+            {
                 uiState = uiState.copy(
-                    status = if(it) AuthUiState.Status.SUCCESS else AuthUiState.Status.FAILED
+                    status = if(it) {
+                        val session = authRepository.currentSession
+                        val validEmail = authRepository.email
+                        if(validEmail.isEmpty() || session.isEmpty()) AuthUiState.Status.FAILED
+                        databaseRepository.setUser(session, User(session, name, validEmail))
+                        AuthUiState.Status.SUCCESS
+                    } else AuthUiState.Status.FAILED
                 )
             }
         }
@@ -50,8 +59,9 @@ class AuthViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY] as NutriHealthApp)
-                val repository = application.container.authRepository
-                AuthViewModel(repository)
+                val authRepository = application.container.authRepository
+                val databaseRepository = application.container.databaseRepository
+                AuthViewModel(authRepository, databaseRepository)
             }
         }
     }

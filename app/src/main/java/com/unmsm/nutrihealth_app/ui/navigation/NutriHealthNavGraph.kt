@@ -34,8 +34,10 @@ fun NutriHealthNavGraph(modifier: Modifier = Modifier) {
 
     val goto = { route: String -> navController.navigate(route) }
 
+    val uid = Firebase.auth.currentUser
+
     val starting =
-        if(Firebase.auth.currentUser == null) NutriHealthNavGraph.Onboarding.name
+        if(uid == null) NutriHealthNavGraph.Onboarding.name
         else NutriHealthNavGraph.Main.name
 
     NavHost(
