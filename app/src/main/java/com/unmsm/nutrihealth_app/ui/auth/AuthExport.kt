@@ -22,6 +22,7 @@ fun AuthExport(
             name = uiState.name,
             email = uiState.email,
             password = uiState.password,
+            errorMessage = uiState.errorMessage,
             onNameChange = viewModel::updateName,
             onEmailChange = viewModel::updateEmail,
             onPasswordChange = viewModel::updatePassword,

@@ -28,6 +28,7 @@ fun AuthComposite(
     name: String,
     email: String,
     password: String,
+    errorMessage: String,
     onNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
@@ -42,14 +43,21 @@ fun AuthComposite(
     LaunchedEffect(status) {
         when(status) {
             AuthUiState.Status.NONE -> {}
-            AuthUiState.Status.LOADING -> Toast.makeText(context, "Cargando...", Toast.LENGTH_SHORT)
+            AuthUiState.Status.LOADING -> Toast.makeText(
+                context,
+                "Cargando...",
+                Toast.LENGTH_SHORT
+            )
                 .show()
             AuthUiState.Status.FAILED -> Toast.makeText(
                 context,
-                "Error. Vuelva a intentar",
+                errorMessage,
                 Toast.LENGTH_SHORT
             ).show()
-            AuthUiState.Status.SUCCESS -> onSuccessfulAuth()
+            AuthUiState.Status.SUCCESS -> {
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                onSuccessfulAuth()
+            }
         }
     }
 

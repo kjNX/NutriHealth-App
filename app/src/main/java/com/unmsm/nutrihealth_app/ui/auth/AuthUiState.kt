@@ -5,6 +5,7 @@ data class AuthUiState(
     var name: String = "",
     var email: String = "",
     var password: String = "",
+    var errorMessage: String = "",
     var status: Status = Status.NONE
 ) {
     enum class Status {

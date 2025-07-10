@@ -101,13 +101,7 @@ class FirestoreRepository : DatabaseRepository {
     }
 
     override suspend fun setUser(uid: String, user: User) {
-        try {
-            instance.document("$userPath/$uid").set(user).await()
-        } catch (e: FirebaseFirestoreException) {
-            Log.d(TAG, "setUser: Failed to fetch data from Firestore. ${e.message}")
-        } catch (e: Exception) {
-            Log.d(TAG, "setUser: An error has ocurred. ${e.message}")
-        }
+        instance.document("$userPath/$uid").set(user).await()
     }
 
     override suspend fun getUserInitial(): UserInitial {

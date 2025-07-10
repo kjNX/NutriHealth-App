@@ -29,9 +29,37 @@ class AuthViewModel(
     fun login(email: String, password: String) {
         uiState = uiState.copy(status = AuthUiState.Status.LOADING)
         viewModelScope.launch {
-            authRepository.login(email, password) {
+            try {
+                val authSuccess = authRepository.login(email, password)
+
+                if (authSuccess) {
+                    val authId = authRepository.currentSession
+
+                    if (authId != null) {
+                        val user = databaseRepository.getUser(authId)
+                        if(user != null) uiState = uiState.copy(
+                            status = AuthUiState.Status.SUCCESS,
+                            errorMessage = "Signing in as ${user.name}..."
+                        ) else uiState.copy(
+                            status = AuthUiState.Status.FAILED,
+                            errorMessage = "User has been blocked. Contact the sysadmin for more information."
+                        )
+                    } else {
+                        uiState = uiState.copy(
+                            status = AuthUiState.Status.FAILED,
+                            errorMessage = "Auth successful but user data missing for DB."
+                        )
+                    }
+                } else {
+                    uiState = uiState.copy(
+                        status = AuthUiState.Status.FAILED,
+                        errorMessage = "Login failed. Please check your credentials."
+                    )
+                }
+            } catch (e: Exception) {
                 uiState = uiState.copy(
-                    status = if(it) AuthUiState.Status.SUCCESS else AuthUiState.Status.FAILED
+                    status = AuthUiState.Status.FAILED,
+                    errorMessage = "An error occurred: ${e.localizedMessage ?: "Unknown error"}"
                 )
             }
         }
@@ -40,16 +68,33 @@ class AuthViewModel(
     fun register(name: String, email: String, password: String) {
         uiState = uiState.copy(status = AuthUiState.Status.LOADING)
         viewModelScope.launch {
-            authRepository.register(email, password)
-            {
+            try {
+                val authSuccess = authRepository.register(email, password)
+
+                if (authSuccess) {
+                    val authId = authRepository.currentSession
+
+                    if (authId != null) {
+                        val user = User(authId, name)
+                        databaseRepository.setUser(authId, user)
+                        uiState = uiState.copy(status = AuthUiState.Status.SUCCESS)
+                    } else {
+                        uiState = uiState.copy(
+                            status = AuthUiState.Status.FAILED,
+                            errorMessage = "Auth successful but user data missing for DB."
+                        )
+                    }
+
+                } else {
+                    uiState = uiState.copy(
+                        status = AuthUiState.Status.FAILED,
+                        errorMessage = "Registration failed."
+                    )
+                }
+            } catch (e: Exception) {
                 uiState = uiState.copy(
-                    status = if(it) {
-                        val session = authRepository.currentSession
-                        val validEmail = authRepository.email
-                        if(validEmail.isEmpty() || session.isEmpty()) AuthUiState.Status.FAILED
-                        databaseRepository.setUser(session, User(session, name, validEmail))
-                        AuthUiState.Status.SUCCESS
-                    } else AuthUiState.Status.FAILED
+                    status = AuthUiState.Status.FAILED,
+                    errorMessage = "An error occurred: ${e.localizedMessage ?: "Unknown error"}"
                 )
             }
         }
